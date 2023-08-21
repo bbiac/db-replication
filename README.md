@@ -1,3 +1,5 @@
+해당 README에서는 설명이 아닌 사용법만 담고 있습니다.  
+
 ### 컴포즈 실행
 
 ```
@@ -83,6 +85,8 @@ CREATE TABLE member
 [replication-datasource](https://github.com/kwon37xi/replication-datasource)  
 [Simplified Guide to MySQL Replication with Docker Compose](https://www.linkedin.com/pulse/simplified-guide-mysql-replication-docker-compose-rakesh-shekhawat/)  
 [Dockerfile에서 자주 쓰이는 명령어](https://www.daleseo.com/dockerfile/)  
-[CHANGE REPLICATION SOURCE TO Statement](https://dev.mysql.com/doc/refman/8.1/en/change-replication-source-to.html)  
+[CHANGE REPLICATION SOURCE TO Statement](https://dev.mysql.com/doc/refman/8.1/en/change-replication-source-to.html)        
 [LazyConnectionDataSourceProxy](https://kwonnam.pe.kr/wiki/springframework/lazyconnectiondatasourceproxy)  
+[데이터베이스 레플리케이션을 통한 쿼리 성능 개선 (feat. Mysql, SpringBoot)](https://hudi.blog/database-replication-with-springboot-and-mysql/)  
 [부하 분산을 위한 MySQL Replication 구성 및 쿼리 요청 분기](https://chagokx2.tistory.com/100)  
+
