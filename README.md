@@ -1,11 +1,10 @@
-### 개요
+### 컴포즈 실행
 
-### 컴포즈 실행 
 ```
 docker-compose up -d
 ```
 
-### replication용 계정 생성
+### replication slave 권한 설정
 
 SOURCE 접속
 
@@ -13,7 +12,7 @@ SOURCE 접속
 docker exec -it mysql-source mysql -u root -p
 ```
 
-user 계정에 REPLICATION SLAVE 권한을 추가. 
+user 계정에 REPLICATION SLAVE 권한 추가
 
 ```mysql
 GRANT REPLICATION SLAVE ON *.* TO 'user'@'%';
@@ -53,7 +52,7 @@ CHANGE REPLICATION SOURCE TO
 SOURCE_HOST='172.29.0.2', 
 SOURCE_USER='user', 
 SOURCE_PASSWORD='password', 
-SOURCE_LOG_FILE='mysql-bin.000001',
+SOURCE_LOG_FILE='mysql-bin.000001', 
 SOURCE_LOG_POS=0, 
 GET_SOURCE_PUBLIC_KEY=1;
 
@@ -66,7 +65,19 @@ START REPLICA;
 SHOW REPLICA STATUS;
 ```
 
+설정을 마친 후 source db에 다음과 같이 create table 명령어를 입력한다.  
+replica db에 동일한 member table이 생성된 것을 확인할 수 있다.  
+
+```sql
+CREATE TABLE member
+(
+    id   BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255)
+);
+```
+
 ### 참고 자료
+
 16장 복제, Real MySQL 8.0 - 백은빈, 이성욱  
 [Spring 레플리케이션 트랜잭션 처리 방식](https://cheese10yun.github.io/spring-transaction/)  
 [replication-datasource](https://github.com/kwon37xi/replication-datasource)  
