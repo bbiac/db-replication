@@ -7,10 +7,10 @@ docker-compose up -d
 
 ### replication용 계정 생성
 
-primary 접속
+SOURCE 접속
 
 ```bash
-docker exec -it mysql-primary mysql -u root -p
+docker exec -it mysql-source mysql -u root -p
 ```
 
 user 계정에 REPLICATION SLAVE 권한을 추가. 
@@ -20,7 +20,7 @@ GRANT REPLICATION SLAVE ON *.* TO 'user'@'%';
 FLUSH PRIVILEGES;
 ```
 
-### PRIMARY DB 정보 확인
+### SOURCE DB 정보 확인
 
 ```mysql
 SHOW MASTER STATUS;
@@ -28,10 +28,10 @@ SHOW MASTER STATUS;
 
 확인한 File(SOURCE_LOG_FILE)과 Position(SOURCE_LOG_POS) 값은 replica 설정에서 사용한다.
 
-### primary ip 주소 확인
+### SOURCE ip 주소 확인
 
 ```bash
-docker inspect -f "{{ .NetworkSettings.Networks.db_mysql_network.IPAddress }}" mysql-primary
+docker inspect -f "{{ .NetworkSettings.Networks.db_mysql_network.IPAddress }}" mysql-source
 ```
 
 확인한 IP주소(SOURCE_HOST) 값은 replica 설정에서 사용한다.

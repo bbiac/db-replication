@@ -1,12 +1,12 @@
 version: '3.8'
 
 services:
-  primary:
+  source:
     build:
       # Dockerfile 위치
-      context: docker/primary
+      context: docker/source
     restart: always
-    container_name: mysql-primary
+    container_name: mysql-source
     environment:
       TZ: 'Asia/Seoul'
       MYSQL_DATABASE: 'db'
@@ -16,8 +16,8 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - db-primary:/var/lib/mysql
-      - db-primary:/var/lib/mysql-files
+      - db-source:/var/lib/mysql
+      - db-source:/var/lib/mysql-files
     networks:
       - mysql_network
 
@@ -41,7 +41,7 @@ services:
       - mysql_network
 
 volumes:
-  db-primary:
+  db-source:
   db-replica:
 
 networks:
