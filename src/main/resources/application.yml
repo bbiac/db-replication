@@ -1,1 +1,12 @@
-
+spring:
+  datasource:
+    source:
+      username: user
+      password: password
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/db
+    replica:
+      username: user
+      password: password
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3307/db

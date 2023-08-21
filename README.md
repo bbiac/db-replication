@@ -73,3 +73,5 @@ SHOW REPLICA STATUS;
 [Simplified Guide to MySQL Replication with Docker Compose](https://www.linkedin.com/pulse/simplified-guide-mysql-replication-docker-compose-rakesh-shekhawat/)  
 [Dockerfile에서 자주 쓰이는 명령어](https://www.daleseo.com/dockerfile/)  
 [CHANGE REPLICATION SOURCE TO Statement](https://dev.mysql.com/doc/refman/8.1/en/change-replication-source-to.html)  
+[LazyConnectionDataSourceProxy](https://kwonnam.pe.kr/wiki/springframework/lazyconnectiondatasourceproxy)  
+[부하 분산을 위한 MySQL Replication 구성 및 쿼리 요청 분기](https://chagokx2.tistory.com/100)  
