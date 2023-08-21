@@ -1,0 +1,10 @@
+.idea
+out/
+*.class
+*.log
+*.jar
+.gradle
+**/build/
+!src/**/build/
+!gradle-wrapper.jar
+!gradle-wrapper.properties
