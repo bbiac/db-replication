@@ -14,10 +14,10 @@ public class RoutingDataSource extends AbstractRoutingDataSource {
         boolean readOnly = TransactionSynchronizationManager.isCurrentTransactionReadOnly();
 
         if (readOnly) {
-            log.info("readOnly: true, request to replica");
+            log.info("readOnly = true, request to replica");
             return DataSourceType.REPLICA;
         }
-        log.info("readOnly: false, request to source");
+        log.info("readOnly = false, request to source");
         return DataSourceType.SOURCE;
     }
 }

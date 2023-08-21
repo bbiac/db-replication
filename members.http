@@ -1,0 +1,10 @@
+### 사용자 저장
+POST http://localhost:8080/members
+Content-Type: application/json
+
+{
+  "name": "herb"
+}
+
+### 사용자 조회
+GET http://localhost:8080/members/1
