@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  primary:
+    build:
+      # Dockerfile 위치
+      context: docker/primary
+    restart: always
+    container_name: mysql-primary
+    environment:
+      TZ: 'Asia/Seoul'
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-primary:/var/lib/mysql
+      - db-primary:/var/lib/mysql-files
+    networks:
+      - mysql_network
+
+  replica:
+    build:
+      context: docker/replica
+    restart: always
+    container_name: mysql-replica
+    environment:
+      TZ: 'Asia/Seoul'
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - "3307:3306"
+    volumes:
+      - db-replica:/var/lib/mysql
+      - db-replica:/var/lib/mysql-files
+    networks:
+      - mysql_network
+
+volumes:
+  db-primary:
+  db-replica:
+
+networks:
+  mysql_network:
+    # default: bridge
+    driver: bridge
