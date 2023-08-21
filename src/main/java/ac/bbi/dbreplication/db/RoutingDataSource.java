@@ -15,9 +15,9 @@ public class RoutingDataSource extends AbstractRoutingDataSource {
 
         if (readOnly) {
             log.info("readOnly: true, request to replica");
-            return DataSourceType.SOURCE;
+            return DataSourceType.REPLICA;
         }
         log.info("readOnly: false, request to source");
-        return DataSourceType.REPLICA;
+        return DataSourceType.SOURCE;
     }
 }
