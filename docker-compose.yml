@@ -2,9 +2,8 @@ version: '3.8'
 
 services:
   source:
-    build:
-      # Dockerfile 위치
-      context: docker/source
+    platform: linux/x86_64
+    image: mysql:latest
     restart: always
     container_name: mysql-source
     environment:
@@ -18,12 +17,13 @@ services:
     volumes:
       - db-source:/var/lib/mysql
       - db-source:/var/lib/mysql-files
+      - ./docker/source.cnf:/etc/mysql/my.cnf
     networks:
       - mysql_network
 
   replica:
-    build:
-      context: docker/replica
+    platform: linux/x86_64
+    image: mysql:latest
     restart: always
     container_name: mysql-replica
     environment:
@@ -37,6 +37,7 @@ services:
     volumes:
       - db-replica:/var/lib/mysql
       - db-replica:/var/lib/mysql-files
+      - ./docker/replica.cnf:/etc/mysql/my.cnf
     networks:
       - mysql_network
 
@@ -46,5 +47,4 @@ volumes:
 
 networks:
   mysql_network:
-    # default: bridge
     driver: bridge
