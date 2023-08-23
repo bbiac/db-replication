@@ -4,5 +4,3 @@ relay_log=mysql-relay-bin
 relay_log_purge=ON
 read_only
 log_replica_updates
-default_authentication_plugin=mysql_native_password
-bind-address=0.0.0.0
