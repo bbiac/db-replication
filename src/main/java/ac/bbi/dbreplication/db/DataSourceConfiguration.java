@@ -1,5 +1,9 @@
 package ac.bbi.dbreplication.db;
 
+import static ac.bbi.dbreplication.db.DataSourceType.Key.REPLICA_NAME;
+import static ac.bbi.dbreplication.db.DataSourceType.Key.ROUTING_NAME;
+import static ac.bbi.dbreplication.db.DataSourceType.Key.SOURCE_NAME;
+
 import java.util.Map;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,47 +17,36 @@ import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
 @Configuration
 public class DataSourceConfiguration {
 
-    private static final String SOURCE = "source";
-    private static final String REPLICA = "replica";
-    private static final String ROUTING = "routing";
-
     @Bean
-    @Qualifier(SOURCE)
+    @Qualifier(SOURCE_NAME)
     @ConfigurationProperties(prefix = "spring.datasource.source")
     public DataSource sourceDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean
-    @Qualifier(REPLICA)
+    @Qualifier(REPLICA_NAME)
     @ConfigurationProperties(prefix = "spring.datasource.replica")
     public DataSource replicaDataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean
-    @Qualifier(ROUTING)
+    @Qualifier(ROUTING_NAME)
     public DataSource routingDataSource(
-            @Qualifier(SOURCE) DataSource sourceDataSource,
-            @Qualifier(REPLICA) DataSource replicaDataSource
+            @Qualifier(SOURCE_NAME) DataSource sourceDataSource,
+            @Qualifier(REPLICA_NAME) DataSource replicaDataSource
     ) {
-        RoutingDataSource transactionRoutingDataSource = new RoutingDataSource();
-
-        Map<Object, Object> dataSourceMap = Map.of(
+        return RoutingDataSource.from(Map.of(
                 DataSourceType.SOURCE, sourceDataSource,
                 DataSourceType.REPLICA, replicaDataSource
-        );
-
-        transactionRoutingDataSource.setDefaultTargetDataSource(sourceDataSource);
-        transactionRoutingDataSource.setTargetDataSources(dataSourceMap);
-
-        return transactionRoutingDataSource;
+        ));
     }
 
     @Bean
     @Primary
     public DataSource dataSource(
-            @Qualifier(ROUTING) DataSource routingDataSource
+            @Qualifier(ROUTING_NAME) DataSource routingDataSource
     ) {
         return new LazyConnectionDataSourceProxy(routingDataSource);
     }
