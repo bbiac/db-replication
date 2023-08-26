@@ -1,4 +1,5 @@
 해당 README에서는 설명이 아닌 사용법만 담고 있습니다.  
+자세한 설명은 [블로그]((https://greeng00se.github.io/db-replication)) 참고 부탁드립니다.
 
 ### 컴포즈 실행
 
