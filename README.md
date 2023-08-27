@@ -33,9 +33,10 @@ SHOW MASTER STATUS;
 ### SOURCE ip 주소 확인
 
 ```bash
-docker inspect -f "{{ .NetworkSettings.Networks.db_mysql_network.IPAddress }}" mysql-source
+docker inspect -f "{{with index .NetworkSettings.Networks \"db-replication_mysql_network\"}}{{.IPAddress}}{{end}}" mysql-source
 ```
 
+ip 주소가 나오지 않는 경우 docker inspect mysql-source로 확인한다.  
 확인한 IP주소(SOURCE_HOST) 값은 replica 설정에서 사용한다.
 
 ### replica mysql 접속
